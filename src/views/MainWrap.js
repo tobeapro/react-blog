@@ -128,7 +128,7 @@ class MainWrap extends Component {
                                     </svg>
                                 </p>
                                 <div className='link'>
-                                    <a href={userInfo.github} target='_blank'>
+                                    <a href={userInfo.github} rel="noopener noreferrer" target='_blank'>
                                         <Icon type="github" /> github
                                     </a>
                                 </div>                              
