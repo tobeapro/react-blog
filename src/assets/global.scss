@@ -1,0 +1,188 @@
+@import '~antd/dist/antd.css';
+@import '~highlight.js/styles/atom-one-dark.css';
+/** reset css **/
+html,body,div,h1,h2,h3,h4,h5,h6,p,span,a,i,em,strong,ul,li,input,textarea,section,header,main,footer,aside,table,th,tr,td{
+    margin:0;
+    padding:0;
+}
+.fl{
+    float:left;
+}
+.fr{
+    float:right;
+}
+ul,li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.clearfix:after{
+    content:'';
+    display: block;
+    clear:both;
+}
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+/** markdown css **/
+.markdown-article{
+	padding:10px;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+	-webkit-animation: spread .6s 1 ease-in-out;
+	-moz-animation: spread .6s 1 ease-in-out;
+	-o-animation: spread .6s 1 ease-in-out;
+	animation: spread .6s 1 ease-in-out;
+}
+.markdown-article pre,.markdown-article code{
+	font-family: Monaco, Andale Mono, Courier New, monospace;	
+	font-weight:bold;	
+}
+.markdown-article>*:first-child {
+    margin-top: 0 !important
+}
+.markdown-article>*:last-child {
+    margin-bottom: 0 !important
+}
+
+.markdown-article a:not([href]) {
+    color: inherit;
+    text-decoration: none
+}
+.markdown-article p,.markdown-article blockquote,.markdown-article ul,.markdown-article ol,.markdown-article dl,.markdown-article table,.markdown-article pre {
+    margin-top: 0;
+    margin-bottom: 6px
+}
+.markdown-article hr {
+    height: .25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #e1e4e8;
+    border: 0
+}
+.markdown-article blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5
+}
+.markdown-article blockquote>:first-child {
+    margin-top: 0
+}
+.markdown-article blockquote>:last-child {
+    margin-bottom: 0
+}
+.markdown-article h1,.markdown-article h2,.markdown-article h3,.markdown-article h4,.markdown-article h5,.markdown-article h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 1.25
+}
+.markdown-article h1 {
+    padding-bottom: 0.3em;
+    font-size: 2em;
+    // color:#f30505;
+}
+.markdown-article h2 {
+    padding-bottom: 0.3em;
+    font-size: 1.5em;
+    // color:#0cd80a;
+}
+.markdown-article h3 {
+    font-size: 1.25em;
+    // color:#057bf7;
+}
+.markdown-article h4 {
+    font-size: 1.1em;
+    // color:#ffa500;
+}
+.markdown-article h5,.markdown-article h6 {
+    font-size: 1em
+}
+.markdown-article>p>img{
+	max-width:100%;
+	height:auto;
+}
+.markdown-article ul,.markdown-article ol {
+    padding-left: 2em
+}
+.markdown-article ul ul,.markdown-article ul ol,.markdown-article ol ol,.markdown-article ol ul {
+    margin-top: 0;
+    margin-bottom: 0
+}
+.markdown-article li {
+    word-wrap: break-all
+}
+.markdown-article li>p {
+    margin-top: 16px
+}
+.markdown-article li+li {
+    margin-top: .25em
+}
+.markdown-article dl {
+    padding: 0
+}
+.markdown-article dl dt {
+    padding: 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600
+}
+.markdown-article dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px
+}
+.markdown-article table {
+    display: block;
+    width: 100%;
+    overflow: auto
+}
+.markdown-article table th {
+    font-weight: 600
+}
+.markdown-article table th,.markdown-article table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5
+}
+.markdown-article table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1
+}
+.markdown-article table tr:nth-child(2n) {
+    background-color: #f6f8fa
+}
+.markdown-article table img {
+    background-color: transparent
+}
+.markdown-article img {
+    max-width: 100%;
+    box-sizing: content-box;
+    background-color: #fff
+}
+.markdown-article tt {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    border-radius: 3px
+}
+.markdown-article>p>code{
+	margin: 0 2px;
+    padding: 2px 6px;
+    color: #fff;
+    background: #ffadd2;
+    border-radius: 4px;
+}
+.markdown-article>pre{
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #abb2bf;
+    background: #282c34;
+}

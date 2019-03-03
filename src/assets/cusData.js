@@ -1,0 +1,47 @@
+export const tagLinkList = [
+    {
+        color:'magenta',
+        name:'JavaScript'
+    },
+    {
+        color:'green',
+        name:'CSS'
+    },
+    {
+        color:'volcano',
+        name:'SQL'
+    },
+    {
+        color:'blue',
+        name:'Node'
+    },
+    {
+        color:'purple',
+        name:'Mongodb'
+    },
+    {
+        color:'red',
+        name:'Vue'
+    },
+    {
+        color:'gold',
+        name:'React'
+    },
+    {
+        color:'geekblue',
+        name:'Linux'
+    },
+    {
+        color:'orange',
+        name:'Linux'
+    },
+    {
+        color:'lime',
+        name:'Linux'
+    },
+    {
+        color:'cyan',
+        name:'Linux'
+    },
+
+]
