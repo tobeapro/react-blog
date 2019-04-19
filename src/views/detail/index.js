@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Spin } from 'antd';
 import styled from 'styled-components';
 import { translateMarkdown } from '../../assets/utils';
 import $http from '../../assets/utils/http';
@@ -21,12 +22,16 @@ export default class Detail extends Component{
     constructor(props){
         super(props)
         this.state = {
+            loading:true,
             article:{
                 _id:null
             }
         }
     }
     getDetail(id){
+        !this.state.loading&&this.setState({
+            loading:true
+        })
         $http.postJSON('/front_manage/api/airticleDetail',{
             id
         }).then(res=>{
@@ -35,6 +40,10 @@ export default class Detail extends Component{
                     article:res.data
                 })
             }
+        }).finally(()=>{
+            this.setState({
+                loading:false
+            })
         })
     }
     componentDidMount(){
@@ -47,6 +56,9 @@ export default class Detail extends Component{
         this.getDetail(nextProps.match.params.id)
     }
     render() {
+        if(this.state.loading){
+            return <Spin tip='Loading...' />
+        }
         return (
             <div>
                 {

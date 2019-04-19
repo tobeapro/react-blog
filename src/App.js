@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { Component } from 'react';
 import store from './store';
 import { Provider } from 'react-redux';
 import './assets/global.scss';
@@ -8,11 +7,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
-          <Fragment>
-              <Route path='/' component={MainWrap} />
-          </Fragment>
-        </Router>
+        <MainWrap />
       </Provider>
     );
   }

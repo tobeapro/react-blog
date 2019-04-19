@@ -2,14 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { Icon, Tag, Divider } from 'antd';
 import styled  from 'styled-components';
-import User from './user';
-import Detail from './detail';
-import Home from './home';
-import Classify from './classify';
-import NotFound from './notFound';
 import TopNavBar from '../components/topNavBar';
 import $http from '../assets/utils/http';
 import { tagLinkList } from '../assets/cusData';
+import routers from '../router';
 const navList = [
     {
       path:'/',
@@ -86,6 +82,12 @@ const Main = styled.main`
     padding:10px 20px;
     height:100%;
     overflow:auto;
+    .ant-spin{
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+    }
 `
 class MainWrap extends Component {
     constructor(props) {
@@ -158,11 +160,13 @@ class MainWrap extends Component {
                         </Aside>
                         <Main>
                             <Switch>
-                                <Route exact path='/' component={Home} />
-                                <Route path='/user' component={User} />
-                                <Route path='/detail/:id' component={Detail} />
-                                <Route path='/classify/:tag' component={Classify} />
-                                <Route component={NotFound} />
+                                {
+                                    routers.map((item,index)=>{
+                                        return (
+                                            <Route key={index} exact={item.isExact||false} path={item.path||null} component={item.component} />
+                                        )
+                                    })
+                                }
                             </Switch>
                         </Main>
                     </Layout>

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Spin } from 'antd';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import $http from '../../assets/utils/http';
@@ -14,16 +15,37 @@ const Section = styled.section`
     }
 `
 class User extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            loading: true
+        }
+    }
     componentDidMount(){
         if(!this.props.userInfo){
             $http.postJSON('/front_manage/api/getInfo').then(res=>{
                 if(res&&res.result===1){
                     this.props.setUserInfo(res.data||{})
                 }
+                this.setState({
+                    loading:false
+                })
+            }).finally(()=>{
+                this.setState({
+                    loading:false
+                })
+                
             })
-        }           
+        }else{
+            this.setState({
+                loading:false
+            }) 
+        }          
     }
     render() {
+        if(this.state.loading){
+            return <Spin tip='Loading...' />
+        }
         return (
             <Section>
                 {

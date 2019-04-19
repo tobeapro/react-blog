@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Spin } from 'antd';
 import { Divider, Timeline } from 'antd';
 import styled from 'styled-components';
 import $http from '../../assets/utils/http';
@@ -26,10 +27,14 @@ class Classify extends PureComponent {
     constructor(props) {
         super(props);
         this.state = { 
-            list:[]
+            list:[],
+            loading:true
          }
     }
     getList(tag){
+        !this.state.loading&&this.setState({
+            loading:true
+        })
         $http.postJSON('/front_manage/api/getArticles',{
             classify:tag||''
         }).then(res=>{
@@ -38,6 +43,10 @@ class Classify extends PureComponent {
                     list:res.data||[]
                 })
             }
+        }).finally(()=>{
+            this.setState({
+                loading:false
+            })
         })
     }
     componentDidMount(){
@@ -49,7 +58,10 @@ class Classify extends PureComponent {
         }
         this.getList(nextProps.match.params.tag)
     }
-    render() { 
+    render() {
+        if(this.state.loading){
+            return <Spin tip='Loading...' />
+        }
         return ( 
             <Section>
                 <Divider orientation="left" style={{'fontSize':'20px'}}>{this.props.match.params.tag}</Divider>      
@@ -71,7 +83,7 @@ class Classify extends PureComponent {
                 }
                 
             </Section>
-         );
+         )
     }
 }
  

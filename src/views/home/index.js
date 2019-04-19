@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Icon, Tag } from 'antd';
+import { Icon, Tag, Spin } from 'antd';
 import styled from 'styled-components';
 import $http from '../../assets/utils/http';
 import { formatDate } from '../../assets/utils';
@@ -79,6 +79,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {  
+            loading: true,
             list: []
         }
     }
@@ -95,9 +96,16 @@ class Home extends Component {
                     list:res.data||[]
                 })
             }
+        }).finally(()=>{
+            this.setState({
+                loading:false
+            })
         })
     }
     render() { 
+        if(this.state.loading){
+            return <Spin tip='Loading...' />
+         }
         return ( 
             <Fragment>
                 <ul>
@@ -130,7 +138,7 @@ class Home extends Component {
                     }
                 </ul>
             </Fragment>
-         );
+        );
     }
 }
  
