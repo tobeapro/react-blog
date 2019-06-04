@@ -1,7 +1,31 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 import styled from 'styled-components';
+const CusHeader = styled.header`
+    position: relative;
+    .expand-button{
+        position:absolute;
+        left:20px;
+        top:50%;
+        transform:translateY(-50%);
+        transition:all .2s ease;
+        cursor: pointer;
+        &.isExpand{
+            transform:rotate(90deg) translateX(-10px);
+        }
+    }
+    .expand-line{
+        display:block;
+        width:20px;
+        height:4px;
+        border-radius:2px;
+        background:#1890ff;
+        &:nth-child(2){
+            margin:4px 0;
+        }
+    }
+`
 const CusMenu = styled(Menu)`
     display:flex;
     justify-content:flex-end;
@@ -30,7 +54,12 @@ class TopNavBar extends PureComponent {
     }
     render() { 
         return ( 
-            <Fragment>
+            <CusHeader>
+                <div className={this.props.isExpand?'expand-button isExpand':'expand-button'} onClick={this.props.toggleSide}>
+                    <i className="expand-line"></i>
+                    <i className="expand-line"></i>
+                    <i className="expand-line"></i>
+                </div>
                 <CusMenu mode="horizontal" selectedKeys={[this.state.currentPath]} onClick={this.handleClick}>
                     {
                         this.props.navList.map((child,index)=>(
@@ -49,7 +78,7 @@ class TopNavBar extends PureComponent {
                         ))
                     }
                 </CusMenu>
-            </Fragment>
+            </CusHeader>
          );
     }
 }

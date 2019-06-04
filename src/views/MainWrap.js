@@ -24,11 +24,15 @@ const Layout = styled.section`
     .ant-tag a{
         color:inherit;
     }
+    @media (max-width:800px){
+        flex-direction:column;
+    }
 `
 const Aside = styled.aside`
     width:200px;
     padding:10px;
     border-right:1px solid #e8e8e8;
+    overflow-y:auto;
     .user-info{
         padding:0 10px;
         font-size:12px;
@@ -76,12 +80,28 @@ const Aside = styled.aside`
     .ant-tag{
         margin-bottom:6px;
     }
+    @media (max-width:800px){
+        display:flex;
+        flex-wrap:wrap;
+        width:100%;
+        border-bottom:1px solid #e8e8e8;
+        .link-item {
+            text-align:center;
+        }
+        .child-item{
+            padding:0 10px;
+            flex:1;
+        }
+    }
 `
 const Main = styled.main`
     flex:1;
     padding:10px 20px;
     height:100%;
     overflow:auto;
+    @media (max-width:800px){
+        width:100%;
+    }
     .ant-spin{
         position:absolute;
         left:50%;
@@ -93,17 +113,22 @@ class MainWrap extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isExpand:false,
             recentList:[]
         }
     }
     componentDidMount() {
-        $http.postJSON('/front_manage/api/getArticles').then(res=>{
+        $http.postJSON('/front_manage/api/latestArticles').then(res=>{
             if(res&&res.result===1){
-                const recentList = (res.data||[]).slice(0,5)
                 this.setState({
-                    recentList
+                    recentList:res.data
                 })
             }
+        })
+    }
+    toggleSide = () => {
+        this.setState({
+            isExpand:!this.state.isExpand
         })
     }
     render() { 
@@ -115,11 +140,14 @@ class MainWrap extends Component {
         return ( 
             <Router>
                 <Fragment>
-                    <TopNavBar navList={navList} {...this.props}></TopNavBar>
+                    <TopNavBar navList={navList} {...this.props} toggleSide={this.toggleSide} isExpand={this.state.isExpand}></TopNavBar>
                     <Layout>
-                        <Aside>
-                            <Divider>个人简介</Divider>
-                            <div className='user-info'>
+                        {
+                            !this.state.isExpand?
+                            <Aside>
+                            <div className="child-item">
+                                <Divider>个人简介</Divider>
+                                <div className='user-info'>
                                 <div className='avatar'>
                                     <img src={userInfo.avatar} alt='avatar' />
                                 </div>
@@ -135,29 +163,35 @@ class MainWrap extends Component {
                                     </a>
                                 </div>                              
                             </div>
-                            <Divider>最近文章</Divider>
-                            {
-                                this.state.recentList&&this.state.recentList.length?(
-                                    <ul>
-                                        {
-                                            this.state.recentList.map(item=>(
-                                                <li className='link-item' key={item._id}><Link to={`/detail/${item._id}`}>{item.title}</Link></li>
-                                            ))
-                                        }
-                                    </ul>
-                                ):(
-                                    <h1>暂无</h1>
-                                )
-                            }
-                            <Divider>标签</Divider>
-                            {
-                                tagLinkList.map((item,index)=>(
-                                    <Tag key={index} color={item.color}>
-                                        <Link to={`/classify/${item.name}`}>{item.name}</Link>
-                                    </Tag>
-                                ))
-                            }
-                        </Aside>
+                            </div>
+                            <div className="child-item">
+                                <Divider>最近文章</Divider>
+                                {
+                                    this.state.recentList&&this.state.recentList.length?(
+                                        <ul>
+                                            {
+                                                this.state.recentList.map(item=>(
+                                                    <li className='link-item' key={item._id}><Link to={`/detail/${item._id}`}>{item.title}</Link></li>
+                                                ))
+                                            }
+                                        </ul>
+                                    ):(
+                                        <h1>暂无</h1>
+                                    )
+                                }
+                            </div>
+                            <div className="child-item">
+                                <Divider>标签</Divider>
+                                {
+                                    tagLinkList.map((item,index)=>(
+                                        <Tag key={index} color={item.color}>
+                                            <Link to={`/classify/${item.name}`}>{item.name}</Link>
+                                        </Tag>
+                                    ))
+                                }
+                            </div>
+                        </Aside>:null
+                        }
                         <Main>
                             <Switch>
                                 {

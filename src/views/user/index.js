@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Spin } from 'antd';
+import PieCount from '../../components/pieCount';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import $http from '../../assets/utils/http';
@@ -18,10 +19,13 @@ class User extends Component{
     constructor(props){
         super(props)
         this.state = {
-            loading: true
+            loading: true,
+            total:0,
+            groups:[]
         }
     }
     componentDidMount(){
+        this.getContentCount()
         if(!this.props.userInfo){
             $http.postJSON('/front_manage/api/getInfo').then(res=>{
                 if(res&&res.result===1){
@@ -42,6 +46,16 @@ class User extends Component{
             }) 
         }          
     }
+    getContentCount(){
+        $http.postJSON('/front_manage/api/articleCount').then(res=>{
+            if(res.result===1){
+                this.setState({
+                    total:res.data.total,
+                    groups:res.data.groups
+                })
+            }
+        })
+    }
     render() {
         if(this.state.loading){
             return <Spin tip='Loading...' />
@@ -55,7 +69,8 @@ class User extends Component{
                             <img className='avatar' src={`${SERVER_URL}${this.props.userInfo.avatar}`} alt='avatar' />
                         </Fragment>
                     ) : null
-                }           
+                } 
+                <PieCount groups={this.state.groups} total={this.state.total} />          
             </Section>
         )
     }
