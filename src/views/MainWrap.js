@@ -91,6 +91,12 @@ const Aside = styled.aside`
         .child-item{
             padding:0 10px;
             flex:1;
+            &:nth-child(1){
+                border-right:1px solid #e8e8e8;
+            }
+            &:nth-child(2){
+                display:none;
+            }
         }
     }
 `
@@ -118,7 +124,9 @@ class MainWrap extends Component {
         }
     }
     componentDidMount() {
-        $http.postJSON('/front_manage/api/latestArticles').then(res=>{
+        $http.postJSON('/front_manage/api/latestArticles',{
+            classify: '[^\u5176\u4ed6]'
+        }).then(res=>{
             if(res&&res.result===1){
                 this.setState({
                     recentList:res.data

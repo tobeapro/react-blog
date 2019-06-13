@@ -89,7 +89,8 @@ class Home extends Component {
     }
     componentDidMount() {
         $http.postJSON('/front_manage/api/getArticles',{
-            name: ''
+            name: '',
+            classify: '[^\u5176\u4ed6]'
         }).then(res=>{
             if(res&&res.result===1){
                 this.setState({
