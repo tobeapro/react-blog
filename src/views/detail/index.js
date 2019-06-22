@@ -39,10 +39,8 @@ export default class Detail extends Component{
             id
         }).then(res=>{
             if(res&&res.result===1){
-                var data = (res.data.content).replace(/\/public\//g,'http://localhost:4000/public/')
-
                 this.setState({
-                    article:Object.assign({},res.data,{content:data})
+                    article:res.data
                 })
             }
         }).finally(()=>{
