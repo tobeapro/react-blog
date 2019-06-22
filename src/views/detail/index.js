@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Spin } from 'antd';
 import styled from 'styled-components';
-import { translateMarkdown } from '../../assets/utils';
+import { translateMarkdown, formatDate } from '../../assets/utils';
 import $http from '../../assets/utils/http';
-import { formatDate } from '../../assets/utils';
+import otherBg from '../../assets/img/other-bg.jpg';
 const ArticleWrap = styled.div`
+    &.isOther{
+        background:url(${otherBg});
+    }
     .title{
         padding:10px 0;
         font-size:24px;
@@ -36,8 +39,10 @@ export default class Detail extends Component{
             id
         }).then(res=>{
             if(res&&res.result===1){
+                var data = (res.data.content).replace(/\/public\//g,'http://localhost:4000/public/')
+
                 this.setState({
-                    article:res.data
+                    article:Object.assign({},res.data,{content:data})
                 })
             }
         }).finally(()=>{
@@ -64,7 +69,7 @@ export default class Detail extends Component{
                 {
                     this.state.article._id?
                     (
-                        <ArticleWrap>
+                        <ArticleWrap className={this.state.article.classify&&this.state.article.classify.indexOf('其他')>-1?'isOther':''}>
                             <h1 className='title'>{this.state.article.title}</h1>
                             <p className='time'>
                                 发布于：{formatDate(this.state.article.create_time)}

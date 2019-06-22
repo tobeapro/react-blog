@@ -29,7 +29,7 @@ export const tagLinkList = [
     },
     {
         color:'geekblue',
-        name:'Linux'
+        name:'其他'
     },
     {
         color:'orange',

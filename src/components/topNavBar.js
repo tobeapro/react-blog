@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
 import styled from 'styled-components';
 const CusHeader = styled.header`
-    position: relative;
+    position: fixed;
+    z-index:10;
+    top:0;
+    width:100%;
+    background:#fff;
     .expand-button{
         position:absolute;
         left:20px;
@@ -64,7 +68,7 @@ class TopNavBar extends PureComponent {
                     {
                         this.props.navList.map((child,index)=>(
                             <Menu.Item key={child.path}>
-                                <Link to={child.path}>
+                                <NavLink to={child.path}>
                                     {
                                         child.icon?
                                         <svg className="icon" aria-hidden="true">
@@ -73,7 +77,7 @@ class TopNavBar extends PureComponent {
                                         :null
                                     }
                                     <span>{child.name} </span>
-                                </Link>
+                                </NavLink>
                             </Menu.Item>
                         ))
                     }

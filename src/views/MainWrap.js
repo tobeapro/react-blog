@@ -6,6 +6,8 @@ import TopNavBar from '../components/topNavBar';
 import $http from '../assets/utils/http';
 import { tagLinkList } from '../assets/cusData';
 import routers from '../router';
+import BackTop from '../components/backTop';
+import RouterScroll from '../components/routerScroll';
 const navList = [
     {
       path:'/',
@@ -19,18 +21,23 @@ const navList = [
     }
 ]
 const Layout = styled.section`
-    display:flex;
-    height:calc(100vh - 50px);
+    padding-top:50px;
     .ant-tag a{
         color:inherit;
     }
     @media (max-width:800px){
         flex-direction:column;
+        overflow:auto;
     }
 `
 const Aside = styled.aside`
-    width:200px;
+    position:fixed;
+    top:50px;
+    left:0;
+    bottom:0;
     padding:10px;
+    width:200px;
+    box-sizing:border-box;
     border-right:1px solid #e8e8e8;
     overflow-y:auto;
     .user-info{
@@ -81,8 +88,7 @@ const Aside = styled.aside`
         margin-bottom:6px;
     }
     @media (max-width:800px){
-        display:flex;
-        flex-wrap:wrap;
+        position:static;
         width:100%;
         border-bottom:1px solid #e8e8e8;
         .link-item {
@@ -90,23 +96,17 @@ const Aside = styled.aside`
         }
         .child-item{
             padding:0 10px;
-            flex:1;
-            &:nth-child(1){
-                border-right:1px solid #e8e8e8;
-            }
-            &:nth-child(2){
+            &:nth-child(1),&:nth-child(2){
                 display:none;
             }
         }
     }
 `
 const Main = styled.main`
-    flex:1;
     padding:10px 20px;
-    height:100%;
-    overflow:auto;
+    margin-left:200px;
     @media (max-width:800px){
-        width:100%;
+        margin:0;
     }
     .ant-spin{
         position:absolute;
@@ -145,71 +145,77 @@ class MainWrap extends Component {
             introduce:'一枚前端',
             github:'https://github.com/tobeapro'
         }
+        const mainStyle = {
+            margin:0
+        }
         return ( 
             <Router>
                 <Fragment>
                     <TopNavBar navList={navList} {...this.props} toggleSide={this.toggleSide} isExpand={this.state.isExpand}></TopNavBar>
+                    <BackTop />
                     <Layout>
                         {
                             !this.state.isExpand?
                             <Aside>
-                            <div className="child-item">
-                                <Divider>个人简介</Divider>
-                                <div className='user-info'>
-                                <div className='avatar'>
-                                    <img src={userInfo.avatar} alt='avatar' />
+                                <div className="child-item">
+                                    <Divider>个人简介</Divider>
+                                    <div className='user-info'>
+                                    <div className='avatar'>
+                                        <img src={userInfo.avatar} alt='avatar' />
+                                    </div>
+                                    <p className='introduce'>
+                                        {userInfo.introduce}
+                                        <svg className="icon" aria-hidden="true">
+                                            <use xlinkHref='#icon-cute-heart'></use>
+                                        </svg>
+                                    </p>
+                                    <div className='link'>
+                                        <a href={userInfo.github} rel="noopener noreferrer" target='_blank'>
+                                            <Icon type="github" /> github
+                                        </a>
+                                    </div>                              
                                 </div>
-                                <p className='introduce'>
-                                    {userInfo.introduce}
-                                    <svg className="icon" aria-hidden="true">
-                                        <use xlinkHref='#icon-cute-heart'></use>
-                                    </svg>
-                                </p>
-                                <div className='link'>
-                                    <a href={userInfo.github} rel="noopener noreferrer" target='_blank'>
-                                        <Icon type="github" /> github
-                                    </a>
-                                </div>                              
-                            </div>
-                            </div>
-                            <div className="child-item">
-                                <Divider>最近文章</Divider>
-                                {
-                                    this.state.recentList&&this.state.recentList.length?(
-                                        <ul>
-                                            {
-                                                this.state.recentList.map(item=>(
-                                                    <li className='link-item' key={item._id}><Link to={`/detail/${item._id}`}>{item.title}</Link></li>
-                                                ))
-                                            }
-                                        </ul>
-                                    ):(
-                                        <h1>暂无</h1>
-                                    )
-                                }
-                            </div>
-                            <div className="child-item">
-                                <Divider>标签</Divider>
-                                {
-                                    tagLinkList.map((item,index)=>(
-                                        <Tag key={index} color={item.color}>
-                                            <Link to={`/classify/${item.name}`}>{item.name}</Link>
-                                        </Tag>
-                                    ))
-                                }
-                            </div>
-                        </Aside>:null
-                        }
-                        <Main>
-                            <Switch>
-                                {
-                                    routers.map((item,index)=>{
-                                        return (
-                                            <Route key={index} exact={item.isExact||false} path={item.path||null} component={item.component} />
+                                </div>
+                                <div className="child-item">
+                                    <Divider>最近文章</Divider>
+                                    {
+                                        this.state.recentList&&this.state.recentList.length?(
+                                            <ul>
+                                                {
+                                                    this.state.recentList.map(item=>(
+                                                        <li className='link-item' key={item._id}><Link to={`/detail/${item._id}`}>{item.title}</Link></li>
+                                                    ))
+                                                }
+                                            </ul>
+                                        ):(
+                                            <h1>暂无</h1>
                                         )
-                                    })
-                                }
-                            </Switch>
+                                    }
+                                </div>
+                                <div className="child-item">
+                                    <Divider>标签</Divider>
+                                    {
+                                        tagLinkList.map((item,index)=>(
+                                            <Tag key={index} color={item.color}>
+                                                <Link to={`/classify/${item.name}`}>{item.name}</Link>
+                                            </Tag>
+                                        ))
+                                    }
+                                </div>
+                            </Aside>:null
+                        }
+                        <Main style={this.state.isExpand?mainStyle:{}}>
+                            <RouterScroll>
+                                <Switch>
+                                    {
+                                        routers.map((item,index)=>{
+                                            return (
+                                                <Route key={index} exact={item.isExact||false} path={item.path||null} component={item.component} />
+                                            )
+                                        })
+                                    }
+                                </Switch>
+                            </RouterScroll>
                         </Main>
                     </Layout>
                 </Fragment>
