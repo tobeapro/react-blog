@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { Icon, Tag, Divider } from 'antd';
+import { connect } from 'react-redux';
+import { setClassifyCount } from '../store/actionCreator';
 import styled  from 'styled-components';
 import TopNavBar from '../components/topNavBar';
 import $http from '../assets/utils/http';
@@ -115,12 +117,21 @@ const Main = styled.main`
         transform:translate(-50%,-50%);
     }
 `
+const itemInGroups = (item,groups) => {
+    for(let child of groups){
+        if(item.name === child.item){
+            item.count = child.count
+            return 
+        }
+    }
+}
 class MainWrap extends Component {
     constructor(props) {
         super(props)
         this.state = {
             isExpand:false,
-            recentList:[]
+            recentList:[],
+            tagLinkList
         }
     }
     componentDidMount() {
@@ -130,6 +141,22 @@ class MainWrap extends Component {
             if(res&&res.result===1){
                 this.setState({
                     recentList:res.data
+                })
+            }
+        })
+        this.getContentCount()
+    }
+    getContentCount(){
+        $http.postJSON('/front_manage/api/articleCount').then(res=>{
+            if(res.result===1){
+                const data = res.data;
+                const groups = data.groups;
+                this.props.setClassifyCount(data);
+                tagLinkList.forEach(item=>{
+                    itemInGroups(item,groups)
+                })
+                this.setState({
+                    tagLinkList
                 })
             }
         })
@@ -195,9 +222,9 @@ class MainWrap extends Component {
                                 <div className="child-item">
                                     <Divider>标签</Divider>
                                     {
-                                        tagLinkList.map((item,index)=>(
+                                        this.state.tagLinkList.map((item,index)=>(
                                             <Tag key={index} color={item.color}>
-                                                <Link to={`/classify/${item.name}`}>{item.name}</Link>
+                                                <Link to={`/classify/${item.name}`}>{item.name}({item.count})</Link>
                                             </Tag>
                                         ))
                                     }
@@ -223,5 +250,17 @@ class MainWrap extends Component {
          );
     }
 }
- 
-export default MainWrap;
+const mapStateToProps = (state) => {
+    return {
+        classifyCount: state.classifyCount
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {       
+        setClassifyCount(val){
+            const action = setClassifyCount(val)
+            dispatch(action)
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(MainWrap);

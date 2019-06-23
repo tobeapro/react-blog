@@ -118,7 +118,7 @@ class Home extends Component {
                                 </div>
                                 <h1 className='title'>{item.title}</h1>
                                 <div className='time'>
-                                    <Icon type="reload" />{formatDate(item.update_time)}
+                                    {/* <Icon type="reload" />{formatDate(item.update_time)} */}
                                     <Icon type="clock-circle" />{formatDate(item.create_time)}
                                 </div>
                                 {

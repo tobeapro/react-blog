@@ -20,7 +20,7 @@ export default class backTop extends Component {
     backToTop = () => {
         let topTimer = setInterval(()=>{
             let scrollY = window.scrollY;
-            if(scrollY<50){
+            if(scrollY<100){
                 window.scroll(0,0)
                 clearInterval(topTimer)
             }else{

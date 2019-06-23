@@ -1,47 +1,58 @@
 export const tagLinkList = [
     {
         color:'magenta',
-        name:'JavaScript'
+        name:'JavaScript',
+        count:0
     },
     {
         color:'green',
-        name:'CSS'
+        name:'CSS',
+        count:0
     },
     {
         color:'volcano',
-        name:'SQL'
+        name:'SQL',
+        count:0
     },
     {
         color:'blue',
-        name:'Node'
+        name:'Node',
+        count:0
     },
     {
         color:'purple',
-        name:'Mongodb'
+        name:'Mongodb',
+        count:0
     },
     {
         color:'red',
-        name:'Vue'
+        name:'Vue',
+        count:0
     },
     {
         color:'gold',
-        name:'React'
+        name:'React',
+        count:0
     },
     {
         color:'geekblue',
-        name:'其他'
+        name:'其他',
+        count:0
     },
     {
         color:'orange',
-        name:'Linux'
+        name:'Linux',
+        count:0
     },
     {
         color:'lime',
-        name:'Linux'
+        name:'Linux',
+        count:0
     },
     {
         color:'cyan',
-        name:'Linux'
+        name:'Linux',
+        count:0
     },
 
 ]

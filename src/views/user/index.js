@@ -19,13 +19,10 @@ class User extends Component{
     constructor(props){
         super(props)
         this.state = {
-            loading: true,
-            total:0,
-            groups:[]
+            loading: true
         }
     }
     componentDidMount(){
-        this.getContentCount()
         if(!this.props.userInfo){
             $http.postJSON('/front_manage/api/getInfo').then(res=>{
                 if(res&&res.result===1){
@@ -46,16 +43,6 @@ class User extends Component{
             }) 
         }          
     }
-    getContentCount(){
-        $http.postJSON('/front_manage/api/articleCount').then(res=>{
-            if(res.result===1){
-                this.setState({
-                    total:res.data.total,
-                    groups:res.data.groups
-                })
-            }
-        })
-    }
     render() {
         if(this.state.loading){
             return <Spin tip='Loading...' />
@@ -70,14 +57,16 @@ class User extends Component{
                         </Fragment>
                     ) : null
                 } 
-                <PieCount groups={this.state.groups} total={this.state.total} />          
+                <PieCount groups={this.props.classifyCount} total={this.props.total} />          
             </Section>
         )
     }
 }
 const mapStateToProps = (state) => {
     return {
-        userInfo: state.userInfo
+        userInfo: state.userInfo,
+        classifyCount:state.classifyCount,
+        total:state.total
     }
 }
 const mapDispatchToProps = (dispatch) => {
