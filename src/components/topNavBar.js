@@ -12,11 +12,11 @@ const CusHeader = styled.header`
         position:absolute;
         left:20px;
         top:50%;
-        transform:translateY(-50%);
+        transform:rotate(90deg) translateX(-10px);
         transition:all .2s ease;
         cursor: pointer;
         &.isExpand{
-            transform:rotate(90deg) translateX(-10px);
+            transform:translateY(-50%);
         }
     }
     .expand-line{

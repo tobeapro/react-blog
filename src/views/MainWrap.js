@@ -35,13 +35,17 @@ const Layout = styled.section`
 const Aside = styled.aside`
     position:fixed;
     top:50px;
-    left:0;
+    left:-200px;
     bottom:0;
     padding:10px;
     width:200px;
+    overflow-y:auto;
     box-sizing:border-box;
     border-right:1px solid #e8e8e8;
-    overflow-y:auto;
+    transition:all .2s ease;
+    &.active{
+        left:0;
+    }
     .user-info{
         padding:0 10px;
         font-size:12px;
@@ -91,8 +95,14 @@ const Aside = styled.aside`
     }
     @media (max-width:800px){
         position:static;
+        transform:translateY(-100%);
         width:100%;
+        height:0;
         border-bottom:1px solid #e8e8e8;
+        &.active{
+            transform:translateY(0);
+            height:auto;
+        }
         .link-item {
             text-align:center;
         }
@@ -107,6 +117,7 @@ const Aside = styled.aside`
 const Main = styled.main`
     padding:10px 20px;
     margin-left:200px;
+    transition:all .2s ease;
     @media (max-width:800px){
         margin:0;
     }
@@ -129,7 +140,7 @@ class MainWrap extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isExpand:false,
+            isExpand:true,
             recentList:[],
             tagLinkList
         }
@@ -173,7 +184,7 @@ class MainWrap extends Component {
             github:'https://github.com/tobeapro'
         }
         const mainStyle = {
-            margin:0
+            margin:0,
         }
         return ( 
             <Router>
@@ -182,8 +193,7 @@ class MainWrap extends Component {
                     <BackTop />
                     <Layout>
                         {
-                            !this.state.isExpand?
-                            <Aside>
+                            <Aside className={this.state.isExpand?'active':''}>
                                 <div className="child-item">
                                     <Divider>个人简介</Divider>
                                     <div className='user-info'>
@@ -229,9 +239,9 @@ class MainWrap extends Component {
                                         ))
                                     }
                                 </div>
-                            </Aside>:null
+                            </Aside>
                         }
-                        <Main style={this.state.isExpand?mainStyle:{}}>
+                        <Main style={this.state.isExpand?{}:mainStyle}>
                             <RouterScroll>
                                 <Switch>
                                     {
