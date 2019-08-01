@@ -6,7 +6,7 @@ import { setClassifyCount } from '../store/actionCreator';
 import styled  from 'styled-components';
 import TopNavBar from '../components/topNavBar';
 import $http from '../assets/utils/http';
-import { tagLinkList } from '../assets/cusData';
+import { colorList } from '../assets/cusData';
 import routers from '../router';
 import BackTop from '../components/backTop';
 import RouterScroll from '../components/routerScroll';
@@ -96,6 +96,7 @@ const Aside = styled.aside`
     @media (max-width:800px){
         position:static;
         transform:translateY(-100%);
+        display:flex;
         width:100%;
         height:0;
         border-bottom:1px solid #e8e8e8;
@@ -108,7 +109,7 @@ const Aside = styled.aside`
         }
         .child-item{
             padding:0 10px;
-            &:nth-child(1),&:nth-child(2){
+            &:nth-child(2){
                 display:none;
             }
         }
@@ -142,12 +143,27 @@ class MainWrap extends Component {
         this.state = {
             isExpand:true,
             recentList:[],
-            tagLinkList
+            classifyList:[],
+            colorList
         }
     }
     componentDidMount() {
+        this.getLatestList()
+        // this.getContentCount()
+        this.getClassifyList()
+    }
+    getClassifyList(){
+        $http.postJSON('/front_manage/api/classify/list').then(res=>{
+            if(res&&res.result===1){
+                this.setState({
+                    classifyList:(res.data||[]).map(item=>Object.assign(item,{count:0}))
+                },this.getContentCount)
+            }
+        })
+    }
+    getLatestList(){
         $http.postJSON('/front_manage/api/latestArticles',{
-            classify: '[^\u5176\u4ed6]'
+            noteqClassify: '其他'
         }).then(res=>{
             if(res&&res.result===1){
                 this.setState({
@@ -155,7 +171,6 @@ class MainWrap extends Component {
                 })
             }
         })
-        this.getContentCount()
     }
     getContentCount(){
         $http.postJSON('/front_manage/api/articleCount').then(res=>{
@@ -163,11 +178,11 @@ class MainWrap extends Component {
                 const data = res.data;
                 const groups = data.groups;
                 this.props.setClassifyCount(data);
-                tagLinkList.forEach(item=>{
+                this.state.classifyList.forEach(item=>{
                     itemInGroups(item,groups)
                 })
                 this.setState({
-                    tagLinkList
+                    colorList:this.state.classifyList
                 })
             }
         })
@@ -232,8 +247,9 @@ class MainWrap extends Component {
                                 <div className="child-item">
                                     <Divider>标签</Divider>
                                     {
-                                        this.state.tagLinkList.map((item,index)=>(
-                                            <Tag key={index} color={item.color}>
+                                        this.state.classifyList.map((item,index)=>(
+                                            
+                                            <Tag key={index} color={colorList[index>=colorList.length?index%colorList.length:index].color}>
                                                 <Link to={`/classify/${item.name}`}>{item.name}({item.count})</Link>
                                             </Tag>
                                         ))

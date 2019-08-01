@@ -40,7 +40,7 @@ class Classify extends PureComponent {
         }).then(res=>{
             if(res&&res.result===1){
                 this.setState({
-                    list:res.data||[]
+                    list:res.data.list||[]
                 })
             }
         }).finally(()=>{

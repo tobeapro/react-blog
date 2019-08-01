@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Icon, Tag, Spin } from 'antd';
+import { Icon, Tag, Spin, Pagination } from 'antd';
 import styled from 'styled-components';
 import $http from '../../assets/utils/http';
 import { formatDate } from '../../assets/utils';
@@ -18,6 +18,11 @@ const Item =  styled.li`
             max-height:400px;
             &:hover{
                 transform:scale(1.2);
+            }
+        }
+        @media (max-width:400px){
+            img{
+                max-height:200px;
             }
         }
     }
@@ -80,7 +85,12 @@ class Home extends Component {
         super(props);
         this.state = {  
             loading: true,
-            list: []
+            list: [],
+            pageOpt:{
+                pageSize:10,
+                pageNo:1,
+                total:0
+            }
         }
     }
     viewClassify = (e,name) => {
@@ -88,13 +98,18 @@ class Home extends Component {
         this.props.history.push(`/classify/${name}`)
     }
     componentDidMount() {
+        this.getList()
+    }
+    getList = () => {
         $http.postJSON('/front_manage/api/getArticles',{
             name: '',
-            classify: '[^\u5176\u4ed6]'
+            noteqClassify: '其他',
+            pageOpt:this.state.pageOpt
         }).then(res=>{
             if(res&&res.result===1){
                 this.setState({
-                    list:res.data||[]
+                    list:res.data.list||[],
+                    pageOpt:Object.assign({},res.data.pageOpt)
                 })
             }
         }).finally(()=>{
@@ -102,6 +117,16 @@ class Home extends Component {
                 loading:false
             })
         })
+    }
+    onChange = (page,pageSize) => {
+        this.setState({
+            pageOpt:Object.assign(this.state.pageOpt,{pageNo:page})
+        },this.getList)
+    }
+    onShowSizeChange = (current, size) => {
+        this.setState({
+            pageOpt:Object.assign(this.state.pageOpt,{pageSize:size,pageNo:1})
+        },this.getList)
     }
     render() { 
         if(this.state.loading){
@@ -138,6 +163,19 @@ class Home extends Component {
                         ))
                     }
                 </ul>
+                {
+                    this.state.pageOpt.total/this.state.pageOpt.pageSize>1&&
+                    <Pagination
+                        showSizeChanger
+                        pageSizeOptions={['5','10','20']}
+                        total={this.state.pageOpt.total}
+                        showTotal={total => `共 ${total} 篇`}
+                        onChange={this.onChange}
+                        onShowSizeChange={this.onShowSizeChange}
+                        pageSize={this.state.pageOpt.pageSize}
+                        defaultCurrent={this.state.pageOpt.pageNo}
+                    />
+                }
             </Fragment>
         );
     }

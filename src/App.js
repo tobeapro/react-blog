@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { LocaleProvider } from 'antd';
+import zhCN from 'antd/es/locale-provider/zh_CN';
 import store from './store';
 import { Provider } from 'react-redux';
 import './assets/global.scss';
@@ -7,7 +9,9 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <MainWrap />
+        <LocaleProvider locale={zhCN}>
+          <MainWrap />
+        </LocaleProvider>
       </Provider>
     );
   }
