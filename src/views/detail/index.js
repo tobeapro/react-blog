@@ -52,7 +52,7 @@ export default class Detail extends Component{
     componentDidMount(){
         this.getDetail(this.props.match.params.id)
     }
-    componentWillReceiveProps(nextProps){
+    componentDidUpdate(nextProps){
         if(nextProps.match.params.id===this.props.match.params.id){
             return 
         }

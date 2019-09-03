@@ -126,20 +126,16 @@ a{
 .markdown-article h1 {
     padding-bottom: 0.3em;
     font-size: 2em;
-    // color:#f30505;
 }
 .markdown-article h2 {
     padding-bottom: 0.3em;
     font-size: 1.5em;
-    // color:#0cd80a;
 }
 .markdown-article h3 {
     font-size: 1.25em;
-    // color:#057bf7;
 }
 .markdown-article h4 {
     font-size: 1.1em;
-    // color:#ffa500;
 }
 .markdown-article h5,.markdown-article h6 {
     font-size: 1em

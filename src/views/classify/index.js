@@ -52,7 +52,7 @@ class Classify extends PureComponent {
     componentDidMount(){
         this.getList(this.props.match.params.tag)
     }
-    componentWillReceiveProps(nextProps){
+    componentDidUpdate(nextProps){
         if(nextProps.match.params.tag===this.props.match.params.tag){
             return 
         }

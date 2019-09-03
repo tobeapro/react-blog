@@ -34,7 +34,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "node-sass": "^4.11.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "styled-components": "^4.1.3"
   }
 }
