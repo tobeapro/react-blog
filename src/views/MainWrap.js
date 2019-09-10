@@ -194,7 +194,7 @@ class MainWrap extends Component {
     }
     render() { 
        const userInfo = {
-            avatar:'https://tobeapro.github.io/img/user.png',
+            avatar:'https://avatars3.githubusercontent.com/u/17215880?s=400&u=f1f8de484423fbc05dbbfe8968f6dfbb8f9c8e11&v=4',
             introduce:'一枚前端',
             github:'https://github.com/tobeapro'
         }
