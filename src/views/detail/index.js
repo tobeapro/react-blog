@@ -52,11 +52,11 @@ export default class Detail extends Component{
     componentDidMount(){
         this.getDetail(this.props.match.params.id)
     }
-    componentDidUpdate(nextProps){
-        if(nextProps.match.params.id===this.props.match.params.id){
+    componentDidUpdate(prevProps){
+        if(prevProps.match.params.id===this.props.match.params.id){
             return 
         }
-        this.getDetail(nextProps.match.params.id)
+        this.getDetail(this.props.match.params.id)
     }
     render() {
         if(this.state.loading){

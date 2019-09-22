@@ -52,11 +52,11 @@ class Classify extends PureComponent {
     componentDidMount(){
         this.getList(this.props.match.params.tag)
     }
-    componentDidUpdate(nextProps){
-        if(nextProps.match.params.tag===this.props.match.params.tag){
+    componentDidUpdate(prevProps){
+        if(prevProps.match.params.tag===this.props.match.params.tag){
             return 
         }
-        this.getList(nextProps.match.params.tag)
+        this.getList(this.props.match.params.tag)
     }
     render() {
         if(this.state.loading){
