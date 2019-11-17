@@ -3,7 +3,7 @@ import { Icon, Tag, Spin, Pagination } from 'antd';
 import styled from 'styled-components';
 import $http from '../../assets/utils/http';
 import { formatDate } from '../../assets/utils';
-import bgImg from '../../assets/img/kobe.jpg';
+import bgImg from '../../assets/img/bg.jpg';
 const SERVER_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '';
 const Item =  styled.li`
     transition:all .4s ease;
@@ -103,7 +103,7 @@ class Home extends Component {
     getList = () => {
         $http.postJSON('/front_manage/api/getArticles',{
             name: '',
-            noteqClassify: '其他',
+            noteqClassify: '生活',
             pageOpt:this.state.pageOpt
         }).then(res=>{
             if(res&&res.result===1){

@@ -163,7 +163,7 @@ class MainWrap extends Component {
     }
     getLatestList(){
         $http.postJSON('/front_manage/api/latestArticles',{
-            noteqClassify: '其他'
+            noteqClassify: '生活'
         }).then(res=>{
             if(res&&res.result===1){
                 this.setState({

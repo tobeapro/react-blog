@@ -226,8 +226,14 @@ a{
 }
 .markdown-article>pre{
     display: block;
-    overflow-x: auto;
+    max-height:500px;
+    overflow: auto;
     padding: 1em;
     color: #abb2bf;
     background: #282c34;
+}
+.markdown-article>pre>code{
+    font-size:14px;
+    font-weight:bold;	
+    line-height: 20px;
 }
