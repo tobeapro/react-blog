@@ -66,6 +66,13 @@ a{
     border:10px solid transparent;
     border-bottom-color:#fff;
 }
+.footer-reference{
+    font-size:12px;
+    padding:10px 20px;
+    line-height:20px;
+    color:#666;
+    text-align: center;
+}
 /** markdown css **/
 .markdown-article{
 	padding:10px;
