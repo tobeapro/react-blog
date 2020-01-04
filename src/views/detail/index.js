@@ -66,7 +66,7 @@ const ArticleWrap = styled.div`
         }
     }
     @media (max-width:800px){
-        padding-right:0;
+        margin-right:0;
         .catelog{
             display:none;
         }
