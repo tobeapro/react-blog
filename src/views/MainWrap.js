@@ -119,6 +119,7 @@ const Main = styled.main`
     padding:10px 20px;
     margin-left:200px;
     transition:all .2s ease;
+    min-height:calc(100vh - 90px);
     @media (max-width:800px){
         margin:0;
     }

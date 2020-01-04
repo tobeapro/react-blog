@@ -20,6 +20,11 @@ const Item =  styled.li`
                 transform:scale(1.2);
             }
         }
+        @media (max-width:600px){
+            img{
+                max-height:300px;
+            }
+        }
         @media (max-width:400px){
             img{
                 max-height:200px;
