@@ -25,46 +25,74 @@
         top:50%;
         margin-top:-20px;
         margin-left:-20px;
-        width:40px;
+        display: flex;
+        align-items: center;
+      }
+      .init-loading-item{
+        margin:0 10px;
+        width:8px;
         height:40px;
-        border:2px solid #1890ff;
-        border-radius: 50%;
-        border-bottom-color:transparent;
+        border-radius: 6px;
+        background:#1890ff;
         animation:loading 1.2s linear infinite ;
         -o-animation:loading 1.2s linear infinite ;
         -moz-animation:loading 1.2s linear infinite ;
         -webkit-animation:loading 1.2s linear infinite ;
       }
+      .init-loading-item:nth-child(2){
+        animation-delay: -.8s;
+        -o-animation-delay: -.8s;
+        -moz-animation-delay: -.8s;
+        -webkit-animation-delay: -.8s;
+      }
+      .init-loading-item:nth-child(3){
+        animation-delay: -.4s;
+        -o-animation-delay: -.4s;
+        -moz-animation-delay: -.4s;
+        -webkit-animation-delay: -.4s;
+      }
       @keyframes loading {
-        from {
-          transform:rotate(0);
+        0% {
+            transform: scaleY(.4);
         }
-        to{
-          transform:rotate(360deg);
+        50% {
+            transform: scaleY(1);
+        }
+        100% {
+            transform: scaleY(.4);
         }
       }
       @-o-keyframes loading {
-        from {
-          transform:rotate(0);
+        0% {
+            transform: scaleY(.4);
         }
-        to{
-          transform:rotate(360deg);
+        50% {
+            transform: scaleY(1);
+        }
+        100% {
+            transform: scaleY(.4);
         }
       }
       @-moz-keyframes loading {
-        from {
-          transform:rotate(0);
+        0% {
+            transform: scaleY(.4);
         }
-        to{
-          transform:rotate(360deg);
+        50% {
+            transform: scaleY(1);
+        }
+        100% {
+            transform: scaleY(.4);
         }
       }
       @-webkit-keyframes loading {
-        from {
-          transform:rotate(0);
+        0% {
+            transform: scaleY(.4);
         }
-        to{
-          transform:rotate(360deg);
+        50% {
+            transform: scaleY(1);
+        }
+        100% {
+            transform: scaleY(.4);
         }
       }
     </style>
@@ -83,7 +111,11 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
       <div class="init-wrap">
-        <div class="init-loading"></div>
+        <div class="init-loading">
+          <div class="init-loading-item"></div>
+          <div class="init-loading-item"></div>
+          <div class="init-loading-item"></div>
+        </div>
       </div>
     </div>
     <script src="https://momentjs.com/downloads/moment.js"></script>
