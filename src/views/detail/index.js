@@ -113,18 +113,16 @@ export default class Detail extends Component{
             if(res&&res.result===1){
                 this.setState({
                     article:res.data
-                },()=>{
-                    window.setTimeout(()=>{
-                        const tagStr = generateCateLog(document.querySelector('.markdown-article'))
-                        this.setState({
-                            catalog:tagStr
-                        })
-                    },10)
                 })
             }
         }).finally(()=>{
             this.setState({
                 loading:false
+            },()=>{
+                const tagStr = generateCateLog(document.querySelector('.markdown-article'))
+                this.setState({
+                    catalog:tagStr
+                })
             })
         })
     }
