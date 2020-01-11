@@ -92,7 +92,7 @@ class Home extends Component {
             loading: true,
             list: [],
             pageOpt:{
-                pageSize:10,
+                pageSize:5,
                 pageNo:1,
                 total:0
             }

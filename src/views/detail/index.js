@@ -144,7 +144,7 @@ export default class Detail extends Component{
                 {
                     this.state.article._id?
                     (
-                        <ArticleWrap className={this.state.article.classify&&this.state.article.classify.indexOf('其他')>-1?'isOther':''}>
+                        <ArticleWrap className={this.state.article.classify&&this.state.article.classify.indexOf('生活')>-1?'isOther':''}>
                             <h1 className='title'>{this.state.article.title}</h1>
                             <p className='time'>
                                 发布于：{formatDate(this.state.article.create_time)}

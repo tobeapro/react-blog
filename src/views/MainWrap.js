@@ -157,7 +157,7 @@ class MainWrap extends Component {
         $http.postJSON('/front_manage/api/classify/list').then(res=>{
             if(res&&res.result===1){
                 this.setState({
-                    classifyList:(res.data||[]).map(item=>Object.assign(item,{count:0}))
+                    classifyList:(res.data||[]).map(item=>Object.assign(item,{count:0})).filter(item=>item.isFix===1)
                 },this.getContentCount)
             }
         })
