@@ -3,7 +3,6 @@ import { Icon, Tag, Spin, Pagination } from 'antd';
 import styled from 'styled-components';
 import $http from '../../assets/utils/http';
 import { formatDate } from '../../assets/utils';
-import bgImg from '../../assets/img/bg.jpg';
 const SERVER_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '';
 const Item =  styled.li`
     transition:all .4s ease;
@@ -15,17 +14,12 @@ const Item =  styled.li`
         overflow:hidden;
         img{
             transition:all .4s ease-out;
-            max-height:400px;
+            max-height:300px;
             &:hover{
                 transform:scale(1.2);
             }
         }
         @media (max-width:600px){
-            img{
-                max-height:300px;
-            }
-        }
-        @media (max-width:400px){
             img{
                 max-height:200px;
             }
@@ -144,7 +138,9 @@ class Home extends Component {
                         this.state.list.map(item=>(
                             <Item key={item._id} onClick={()=>{this.props.history.push(`/detail/${item._id}`)}}>
                                 <div className='bgWrap'>
-                                    <img src={item.face_img?SERVER_URL+item.face_img:bgImg} alt='bg' />
+                                    {
+                                        item.face_img?<img src={SERVER_URL+item.face_img} alt='bg' />:null
+                                    }
                                 </div>
                                 <h1 className='title'>{item.title}</h1>
                                 <div className='time'>

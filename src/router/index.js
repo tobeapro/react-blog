@@ -16,10 +16,10 @@ export default [
         })
     },
     {
-        path:'/user',
-        name:'user',
+        path:'/about',
+        name:'about',
         component:Loadable({
-            loader: () => import('../views/user'),
+            loader: () => import('../views/about'),
             loading: Loading,
             delay: 300
         })

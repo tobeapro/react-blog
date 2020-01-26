@@ -17,9 +17,9 @@ const navList = [
       icon:'home'
     },
     {
-      path:'/user',
-      name:'用户',
-      icon:'user'
+      path:'/about',
+      name:'关于',
+      icon:'guanyu'
     }
 ]
 const Layout = styled.section`
