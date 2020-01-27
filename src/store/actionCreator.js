@@ -1,4 +1,4 @@
-import { SET_USER_INFO, SET_CLASSIFY_COUNT } from './actionType';
+import { SET_USER_INFO, SET_CLASSIFY_COUNT, SET_COMMENT_ACCOUNT } from './actionType';
 export const setUserInfo = (value) => {
     return {
         type:SET_USER_INFO,
@@ -11,3 +11,7 @@ export const setClassifyCount = (value) => {
         value
     }
 }
+export const setCommentAccout = value => ({
+    type: SET_COMMENT_ACCOUNT,
+    value
+})
