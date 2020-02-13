@@ -264,9 +264,9 @@ class Detail extends Component{
                                 className='markdown-article'
                                 dangerouslySetInnerHTML={{__html:translateMarkdown(this.state.article.content)}}>
                             </article>
-                            <div class="catelog" dangerouslySetInnerHTML={{__html:this.state.catalog}}>
+                            <div className="catelog" dangerouslySetInnerHTML={{__html:this.state.catalog}}>
                             </div>
-                            <Button style={{'margin-left':'10px'}} type="primary" onClick={()=>{ this.setState({commentVisible:true});this.getCommentList()}}>查看评论</Button>
+                            <Button style={{'marginLeft':'10px'}} type="primary" onClick={()=>{ this.setState({commentVisible:true});this.getCommentList()}}>查看评论</Button>
                             <Drawer
                                 title={`评论列表(${this.state.commentList.length})`}
                                 placement="right"
@@ -279,13 +279,13 @@ class Detail extends Component{
                                     {
                                         this.state.commentList.map((item,index)=>{
                                             return (
-                                                <li class="comment-item">
-                                                    <div class="name">昵称：{item.comment_name}</div>
-                                                    <div class="content">评论内容：{item.content}</div>
-                                                    <div class="time">评论时间：{formatDate(item.comment_time)}</div>
+                                                <li className="comment-item">
+                                                    <div className="name">昵称：{item.comment_name}</div>
+                                                    <div className="content">评论内容：{item.content}</div>
+                                                    <div className="time">评论时间：{formatDate(item.comment_time)}</div>
                                                     {
                                                         item.author_reply?(
-                                                            <div class="reply">作者回复：{item.author_reply}</div>
+                                                            <div className="reply">作者回复：{item.author_reply}</div>
                                                         ):null
                                                     }
                                                 </li>
@@ -304,7 +304,7 @@ class Detail extends Component{
                                 onCancel={()=>{this.setState({modalVisible:false})}}
                                 >
                                 <ContentWrap>
-                                    <div class="info">
+                                    <div className="info">
                                         <Input
                                             value={this.state.contactName} 
                                             onChange={e=>{
@@ -314,7 +314,7 @@ class Detail extends Component{
                                             }}
                                             addonBefore="昵称" 
                                             placeholder="怎么称呼你" 
-                                            maxLength="20" 
+                                            maxLength={20} 
                                             allowClear />
                                         <Input
                                             value={this.state.contactEmail} 
@@ -325,7 +325,7 @@ class Detail extends Component{
                                             }}
                                             addonBefore="邮箱" 
                                             placeholder="你的联系邮箱" 
-                                            maxLength="20" 
+                                            maxLength={20}
                                             allowClear />
                                     </div>
                                     <Input.TextArea 
@@ -336,7 +336,7 @@ class Detail extends Component{
                                             })
                                         }}
                                         placeholder="请输入你的看法和建议" 
-                                        maxLength="200" 
+                                        maxLength={200} 
                                         allowClear />
                                 </ContentWrap>
                             </Modal>

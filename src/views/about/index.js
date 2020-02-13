@@ -74,16 +74,16 @@ class About extends Component{
         }
         return (
             <Section>
-                <div class="info">
+                <div className="info">
                     {
                         this.props.userInfo ? (
-                            <div class="user">
+                            <div className="user">
                                 <h1>当前账号：{this.props.userInfo.name}</h1>
                                 <img className='avatar' src={`${SERVER_URL}${this.props.userInfo.avatar}`} alt='avatar' />
                             </div>
                         ) : null
                     } 
-                    <div class="intro">
+                    <div className="intro">
                         <p>前端页面使用React+Antd的组合，<a href="https://github.com/tobeapro/react-blog" target="__blank">项目地址及说明</a></p>
                         <p>不忘初心  <span role="img" aria-label="emoji">🤩🤩🤩</span></p>
                         <p>坚持奋斗  <span role="img" aria-label="emoji">✨✨✨</span></p>

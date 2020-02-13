@@ -12,7 +12,7 @@ class App extends Component {
         <ConfigProvider locale={zhCN}>
           <MainWrap />
         </ConfigProvider>
-        <div class="footer-reference">© CopyRight 2019-2020&nbsp;&nbsp;&nbsp;&nbsp;皖ICP备19011615号</div>
+        <div className="footer-reference">© CopyRight 2019-2020&nbsp;&nbsp;&nbsp;&nbsp;皖ICP备19011615号</div>
       </Provider>
     );
   }

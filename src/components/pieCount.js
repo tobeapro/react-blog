@@ -49,7 +49,7 @@ class Donut extends React.Component {
           />
           <Tooltip
             showTitle={false}
-            itemTpl="<li><span style=&quot;background-color:{color};&quot; class=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
+            itemTpl="<li><span style=&quot;background-color:{color};&quot; className=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
           />
           <Guide>
             <Html
