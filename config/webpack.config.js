@@ -24,6 +24,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressWebpackPlugin = require('compression-webpack-plugin');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
@@ -600,8 +601,17 @@ module.exports = function(webpackEnv) {
           silent: true,
           formatter: typescriptFormatter,
         }),
-        // analyzer
-        // new BundleAnalyzerPlugin()
+      // analyzer
+      isEnvProduction && new BundleAnalyzerPlugin(),
+      // Gzip
+      isEnvProduction && new CompressWebpackPlugin({
+        // asset: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: /\.(js|css)$/,
+        threshold: 10240,
+        minRatio: 0.8
+      }),
+      
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
