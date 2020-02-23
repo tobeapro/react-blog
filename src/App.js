@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ConfigProvider } from 'antd';
+import 'antd/dist/antd.css';
 import zhCN from 'antd/es/locale-provider/zh_CN';
 import store from './store';
 import { Provider } from 'react-redux';
