@@ -3,7 +3,7 @@ import { Icon, Tag, Spin, Pagination } from 'antd';
 import styled from 'styled-components';
 import $http from '../../assets/utils/http';
 import { formatDate } from '../../assets/utils';
-const SERVER_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '';
+// const SERVER_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '';
 const Item =  styled.li`
     transition:all .4s ease;
     margin:10px;
@@ -137,11 +137,11 @@ class Home extends Component {
                     {
                         this.state.list.map(item=>(
                             <Item key={item._id} onClick={()=>{this.props.history.push(`/detail/${item._id}`)}}>
-                                <div className='bgWrap'>
+                                {/* <div className='bgWrap'>
                                     {
                                         item.face_img?<img src={SERVER_URL+item.face_img} alt='bg' />:null
                                     }
-                                </div>
+                                </div> */}
                                 <h1 className='title'>{item.title}</h1>
                                 <div className='time'>
                                     {/* <Icon type="reload" />{formatDate(item.update_time)} */}

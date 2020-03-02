@@ -71,7 +71,7 @@ class Classify extends PureComponent {
                             {
                                 this.state.list.map(item=>(
                                     <Timeline.Item key={item._id}>
-                                        <span className='time'>{new Date(item.update_time).toLocaleDateString()}</span>
+                                        <span className='time'>{new Date(item.create_time).toLocaleDateString()}</span>
                                         <span className='title' onClick={()=>{this.props.history.push(`/detail/${item._id}`)}}>{item.title}</span>
                                     </Timeline.Item>
                                 ))
