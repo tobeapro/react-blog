@@ -87,6 +87,18 @@ class About extends Component{
                         <p>前端页面使用React+Antd的组合，<a href="https://github.com/tobeapro/react-blog" target="__blank">项目地址及说明</a></p>
                         <p>不忘初心  <span role="img" aria-label="emoji">🤩🤩🤩</span></p>
                         <p>坚持奋斗  <span role="img" aria-label="emoji">✨✨✨</span></p>
+                        <div className="link">
+                            <a href="https://juejin.im/user/57b97872128fe10054cde1bc" target="__blank">
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref='#icon-juejin'></use>
+                                </svg>
+                            </a>
+                            <a href="https://segmentfault.com/u/rakl" target="__blank">
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref='#icon-iconsf-copy'></use>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <PieCount groups={this.props.classifyCount} total={this.props.total} />          

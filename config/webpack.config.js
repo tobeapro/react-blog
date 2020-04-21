@@ -24,6 +24,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const AddAsssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
 const CompressWebpackPlugin = require('compression-webpack-plugin');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -611,7 +612,18 @@ module.exports = function(webpackEnv) {
         threshold: 10240,
         minRatio: 0.8
       }),
-      
+      // DllReferencePlugin
+      new webpack.DllReferencePlugin({
+        context: __dirname,
+        manifest: require('../dll/vendor-manifest.json'),
+      }),
+      // 添加dll资源
+      new AddAsssetHtmlWebpackPlugin({
+        filepath: path.resolve(__dirname, '../dll/*.js'),
+        hash:true,
+        outputPath: 'static/js',
+        publicPath: '/static/js'
+      }) 
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
@@ -629,16 +641,16 @@ module.exports = function(webpackEnv) {
     performance: false,
     // externals
     externals : {
-      'react': 'React',
-      'react-dom': 'ReactDOM',
-      'react-router-dom': 'ReactRouterDOM',
-      'axios': 'axios',
-      '@antv/data-set': 'DataSet',
-      'marked': 'marked',
-      'highlight.js': 'hljs',
-      'styled-components': 'styled',
-      'antd': 'antd',
-      'bizcharts': 'BizCharts'
+      // 'react': 'React',
+      // 'react-dom': 'ReactDOM',
+      // 'react-router-dom': 'ReactRouterDOM',
+      // 'axios': 'axios',
+      // '@antv/data-set': 'DataSet',
+      // 'marked': 'marked',
+      // 'highlight.js': 'hljs',
+      // 'styled-components': 'styled',
+      // 'antd': 'antd',
+      // 'bizcharts': 'BizCharts'
     }
   };
 };

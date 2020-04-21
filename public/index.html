@@ -96,16 +96,6 @@
         }
       }
     </style>
-    <script>
-       function addAntdStyle(){
-         var head = document.querySelector('head');
-         var cssNode = document.createElement('link');
-         cssNode.href = '/antd.min.css';
-         cssNode.rel = 'stylesheet';
-         head.insertBefore(cssNode,head.childNodes[0]);
-       }
-    </script>
-    <link href="https://cdn.bootcss.com/antd/3.23.1/antd.min.css" onerror="addAntdStyle()" rel="stylesheet">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -118,49 +108,5 @@
         </div>
       </div>
     </div>
-    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
-    <script>
-      window.moment || document.write('<script src="%PUBLIC_URL%/moment.js"><\/script>')
-    </script>
-    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
-    <script>
-      window.axios || document.write('<script src="%PUBLIC_URL%/axios.min.js"><\/script>')
-    </script>
-    <script src="https://cdn.bootcss.com/react/16.9.0-rc.0/umd/react.production.min.js"></script>
-    <script>
-      window.React || document.write('<script src="%PUBLIC_URL%/react.production.min.js"><\/script>')
-    </script>
-    <script src="https://cdn.bootcss.com/react-dom/16.9.0-alpha.0/umd/react-dom.production.min.js"></script>
-    <script>
-      window.ReactDOM || document.write('<script src="%PUBLIC_URL%/react-dom.production.min.js"><\/script>')
-    </script>
-    <script src="https://cdn.bootcss.com/react-router-dom/4.3.1/react-router-dom.min.js"></script>
-    <script>
-      window.ReactRouterDOM || document.write('<script src="%PUBLIC_URL%/react-router-dom.min.js"><\/script>')
-    </script>
-    <script src="https://cdn.bootcss.com/styled-components/4.3.2/styled-components.min.js"></script>
-    <script>
-      window.styled || document.write('<script src="%PUBLIC_URL%/styled-components.min.js"><\/script>')
-    </script>
-    <script src="https://cdn.bootcss.com/marked/0.6.3/marked.min.js"></script>
-    <script>
-      window.marked || document.write('<script src="%PUBLIC_URL%/marked.min.js"><\/script>')
-    </script>
-    <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
-    <script>
-      window.hljs || document.write('<script src="%PUBLIC_URL%/highlight.min.js"><\/script>')
-    </script>
-    <script src="https://cdn.bootcss.com/antd/3.23.1/antd.min.js"></script>
-    <script>
-      window.antd || document.write('<script src="%PUBLIC_URL%/antd.min.js"><\/script>')
-    </script>
-    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.2/dist/data-set.min.js"></script>
-    <script>
-      window.DataSet || document.write('<script src="%PUBLIC_URL%/data-set.min.js"><\/script>')
-    </script>
-    <script src="https://unpkg.com/bizcharts@3.5.5/umd/BizCharts.min.js"></script>
-    <script>
-      window.BizCharts || document.write('<script src="%PUBLIC_URL%/BizCharts.min.js"><\/script>')
-    </script>
   </body>
 </html>

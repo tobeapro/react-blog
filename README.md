@@ -1,5 +1,12 @@
 ## 前端React+Antd ，后端Koa的博客平台
 
+#### 启动
+```js
+yarn build:dll //因为用了dllPlugin，先成功公共vendor
+yarn start //测试开发
+yarn build //生产打包
+```
+
 > 为什么不写文档说明，一是写不好，二也是最关键的实在是产出太少了😂
 
 #### 前端作为展示所以结构比较简单
