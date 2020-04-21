@@ -2,7 +2,7 @@
 
 #### 启动
 ```js
-yarn build:dll //因为用了dllPlugin，先成功公共vendor
+yarn build:dll //dllPlugin，生成公共vendor
 yarn start //测试开发
 yarn build //生产打包
 ```
