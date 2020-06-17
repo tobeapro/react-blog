@@ -44,6 +44,11 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
+
+// Process CLI arguments
+const argv = process.argv.slice(2);
+const enableAnalyzer = argv.indexOf('--analyzer') !== -1;
+
 module.exports = function(webpackEnv) {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
@@ -603,7 +608,7 @@ module.exports = function(webpackEnv) {
           formatter: typescriptFormatter,
         }),
       // analyzer
-      isEnvProduction && new BundleAnalyzerPlugin(),
+      isEnvProduction && enableAnalyzer && new BundleAnalyzerPlugin(),
       // Gzip
       isEnvProduction && new CompressWebpackPlugin({
         // asset: '[path].gz[query]',

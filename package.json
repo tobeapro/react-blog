@@ -67,6 +67,7 @@
     "start": "node scripts/start.js",
     "dev": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "build:analyzer": "node scripts/build.js --analyzer",
     "build:dll": "webpack --config config/webpack.dll.js --mode production",
     "test": "node scripts/test.js"
   },
