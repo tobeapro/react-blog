@@ -1,30 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import { Icon, Tag, Spin, Pagination } from 'antd';
+import { Icon, Tag, Spin, Button  } from 'antd';
 import styled from 'styled-components';
 import $http from '../../assets/utils/http';
-import { formatDate } from '../../assets/utils';
+// import { formatDate } from '../../assets/utils';
 // const SERVER_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '';
 const Item =  styled.li`
     transition:all .4s ease;
     margin:10px;
     padding:10px;
-    border:1px solid #e8e8e8;
+    border-bottom:1px solid #e8e8e8;
     cursor:pointer;
-    .bgWrap{
-        overflow:hidden;
-        img{
-            transition:all .4s ease-out;
-            max-height:300px;
-            &:hover{
-                transform:scale(1.2);
-            }
-        }
-        @media (max-width:600px){
-            img{
-                max-height:200px;
-            }
-        }
-    }
     .title{
         padding:10px;
         font-size:20px;
@@ -37,7 +22,7 @@ const Item =  styled.li`
         padding:10px;
         font-size:14px;
         line-height:20px;
-        color:#666;
+        color:var(--second-text);
         .anticon{
             margin-right:6px;
             font-size:15px;
@@ -54,12 +39,12 @@ const Item =  styled.li`
         padding:0 10px;
         .anticon{
             margin-right:10px;
-            color:#000;
+            color:var(--second-text);
         }
     }
     &:hover{
         transform:translateX(10px);
-        background-color:#bae7ff6b;
+        background-color:var(--item-bg);
         box-shadow:0 0 30px 10px #aaa;
         .title{
             font-weight:bold;
@@ -67,9 +52,9 @@ const Item =  styled.li`
     }
 `
 const colorList = [
-    '#f50',
     '#2db7f5',
     '#87d068',
+    '#f50',
     '#108ee9',
     'orange',
     'gold',
@@ -84,10 +69,12 @@ class Home extends Component {
         super(props);
         this.state = {  
             loading: true,
+            isAll:false,
+            listLoading:false,
             list: [],
             pageOpt:{
-                pageSize:5,
-                pageNo:1,
+                pageSize:10,
+                pageNo:0,
                 total:0
             }
         }
@@ -100,32 +87,35 @@ class Home extends Component {
         this.getList()
     }
     getList = () => {
+        this.setState({
+            listLoading:true
+        })
         $http.postJSON('/front_manage/api/getArticles',{
             name: '',
             noteqClassify: '生活',
-            pageOpt:this.state.pageOpt
+            pageOpt:{
+                ...this.state.pageOpt,
+                pageNo:this.state.pageOpt.pageNo+1
+            }
         }).then(res=>{
             if(res&&res.result===1){
                 this.setState({
-                    list:res.data.list||[],
+                    list:this.state.list.concat(res.data.list||[]),
                     pageOpt:Object.assign({},res.data.pageOpt)
+                },()=>{
+                    if(this.state.list.length>=this.state.pageOpt.total){
+                        this.setState({
+                            isAll: true
+                        })
+                    }
                 })
             }
         }).finally(()=>{
             this.setState({
-                loading:false
+                loading:false,
+                listLoading: false
             })
         })
-    }
-    onChange = (page,pageSize) => {
-        this.setState({
-            pageOpt:Object.assign(this.state.pageOpt,{pageNo:page})
-        },this.getList)
-    }
-    onShowSizeChange = (current, size) => {
-        this.setState({
-            pageOpt:Object.assign(this.state.pageOpt,{pageSize:size,pageNo:1})
-        },this.getList)
     }
     render() { 
         if(this.state.loading){
@@ -137,16 +127,11 @@ class Home extends Component {
                     {
                         this.state.list.map(item=>(
                             <Item key={item._id} onClick={()=>{this.props.history.push(`/detail/${item._id}`)}}>
-                                {/* <div className='bgWrap'>
-                                    {
-                                        item.face_img?<img src={SERVER_URL+item.face_img} alt='bg' />:null
-                                    }
-                                </div> */}
                                 <h1 className='title'>{item.title}</h1>
-                                <div className='time'>
-                                    {/* <Icon type="reload" />{formatDate(item.update_time)} */}
+                                {/* <div className='time'>
+                                    <Icon type="reload" />{formatDate(item.update_time)}
                                     <Icon type="clock-circle" />{formatDate(item.create_time)}
-                                </div>
+                                </div> */}
                                 {
                                     item.classify?(
                                         <div className='classify'>
@@ -164,19 +149,11 @@ class Home extends Component {
                         ))
                     }
                 </ul>
-                {
-                    this.state.pageOpt.total/this.state.pageOpt.pageSize>1&&
-                    <Pagination
-                        showSizeChanger
-                        pageSizeOptions={['5','10','20']}
-                        total={this.state.pageOpt.total}
-                        showTotal={total => `共 ${total} 篇`}
-                        onChange={this.onChange}
-                        onShowSizeChange={this.onShowSizeChange}
-                        pageSize={this.state.pageOpt.pageSize}
-                        defaultCurrent={this.state.pageOpt.pageNo}
-                    />
-                }
+                <div style={{padding:'10px', textAlign: 'center'}}>
+                    {
+                        this.state.isAll ? <Tag color="#f50">到底了...</Tag> : <Button type="primary" size="small" loading={this.state.listLoading} onClick={()=>{this.getList()}} icon="plus">加载更多</Button>
+                    }       
+                </div>
             </Fragment>
         );
     }

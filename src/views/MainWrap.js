@@ -41,7 +41,7 @@ const Aside = styled.aside`
     width:200px;
     overflow-y:auto;
     box-sizing:border-box;
-    border-right:1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
     transition:all .2s ease;
     &.active{
         left:0;
@@ -70,7 +70,7 @@ const Aside = styled.aside`
             }
         }
         .link a{
-            color:#666;
+            color:var(--main-text);
             .anticon{
                 position:relative;
                 top:2px;
@@ -84,7 +84,7 @@ const Aside = styled.aside`
         overflow:hidden;
         text-overflow:ellipsis;
         a{ 
-            color:#666;
+            color:var(--main-text);
             &:hover{
                 text-decoration:underline;
             }
@@ -213,21 +213,21 @@ class MainWrap extends Component {
                                 <div className="child-item">
                                     <Divider>个人简介</Divider>
                                     <div className='user-info'>
-                                    <div className='avatar'>
-                                        <img src={userInfo.avatar} alt='avatar' />
+                                        <div className='avatar'>
+                                            <img src={userInfo.avatar} alt='avatar' />
+                                        </div>
+                                        <p className='introduce'>
+                                            {userInfo.introduce}
+                                            <svg className="icon" aria-hidden="true">
+                                                <use xlinkHref='#icon-cute-heart'></use>
+                                            </svg>
+                                        </p>
+                                        <div className='link'>
+                                            <a href={userInfo.github} rel="noopener noreferrer" target='_blank'>
+                                                <Icon type="github" /> github
+                                            </a>
+                                        </div>                              
                                     </div>
-                                    <p className='introduce'>
-                                        {userInfo.introduce}
-                                        <svg className="icon" aria-hidden="true">
-                                            <use xlinkHref='#icon-cute-heart'></use>
-                                        </svg>
-                                    </p>
-                                    <div className='link'>
-                                        <a href={userInfo.github} rel="noopener noreferrer" target='_blank'>
-                                            <Icon type="github" /> github
-                                        </a>
-                                    </div>                              
-                                </div>
                                 </div>
                                 <div className="child-item">
                                     <Divider>最近文章</Divider>

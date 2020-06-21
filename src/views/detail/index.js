@@ -21,7 +21,7 @@ const ArticleWrap = styled.div`
         font-size:12px;
         line-height:20px;
         text-align:center;
-        color:#666;
+        color:var(--second-text);
     }
     .catelog{
         position:fixed;
@@ -40,7 +40,7 @@ const ArticleWrap = styled.div`
             font-size:14px;
             font-weight:bold;
             line-height:24px;
-            color:#666;
+            color:var(--main-text);
             white-space:nowrap;
             overflow:hidden;
             text-overflow:ellipsis;
@@ -62,7 +62,6 @@ const ArticleWrap = styled.div`
                 line-height:20px;
             }
             &:hover{
-                color:#1890ff;
                 text-decoration:underline;
             }
         }
@@ -161,6 +160,10 @@ class Detail extends Component{
                 loading:false
             },()=>{
                 const tagStr = generateCateLog(document.querySelector('.markdown-article'))
+                if(!tagStr){
+                    document.querySelector('#article-wrap').style.marginRight = 0
+                    return 
+                }
                 this.setState({
                     catalog:tagStr
                 })
@@ -255,7 +258,7 @@ class Detail extends Component{
                 {
                     this.state.article._id?
                     (
-                        <ArticleWrap className={this.state.article.classify&&this.state.article.classify.indexOf('生活')>-1?'isOther':''}>
+                        <ArticleWrap id="article-wrap" className={this.state.article.classify&&this.state.article.classify.indexOf('生活')>-1?'isOther':''}>
                             <h1 className='title'>{this.state.article.title}</h1>
                             <p className='time'>
                                 发布于：{formatDate(this.state.article.create_time)}
@@ -264,8 +267,7 @@ class Detail extends Component{
                                 className='markdown-article'
                                 dangerouslySetInnerHTML={{__html:translateMarkdown(this.state.article.content)}}>
                             </article>
-                            <div className="catelog" dangerouslySetInnerHTML={{__html:this.state.catalog}}>
-                            </div>
+                            <div className="catelog" style={{display:!this.state.catalog?'none':''}} dangerouslySetInnerHTML={{__html:this.state.catalog}}></div>
                             <Button style={{'marginLeft':'10px'}} type="primary" onClick={()=>{ this.setState({commentVisible:true});this.getCommentList()}}>查看评论</Button>
                             <Drawer
                                 title={`评论列表(${this.state.commentList.length})`}

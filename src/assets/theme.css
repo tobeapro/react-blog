@@ -1,0 +1,28 @@
+/* theme css */
+html,body,.ant-menu{
+    color:var(--main-text);
+    background:var(--main-bg);
+}
+::-webkit-scrollbar {
+    width : 10px;
+    height: 2px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: var(--second-text);
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: var(--main-bg);
+}
+.ant-divider-inner-text,
+.ant-menu-horizontal > .ant-menu-item > a,
+.ant-timeline-item,
+.footer-reference,
+h1,h2,h3,h4,h5,h6{
+    color:var(--main-text);
+}
+.ant-menu-horizontal > .ant-menu-item-selected > a {
+    color: #1890ff;
+}

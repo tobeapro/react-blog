@@ -11,7 +11,7 @@ const Section = styled.section`
         .time{
             margin:0 20px 0 10px;
             font-size:12px;
-            color:#666;
+            color:var(--second-text);
         }
         .title{
             transition:all .2s;

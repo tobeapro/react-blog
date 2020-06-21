@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Spin } from 'antd';
-import PieCount from '../../components/pieCount';
+// import PieCount from '../../components/pieCount';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import $http from '../../assets/utils/http';
 import { setUserInfo } from '../../store/actionCreator';
-const SERVER_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '';
 const Section = styled.section`
     padding:20px;
     .info{
@@ -27,6 +26,7 @@ const Section = styled.section`
             }
             .link{
                 padding:10px;
+                font-size:30px;
                 a{
                     margin-right:10px;
                 }
@@ -75,14 +75,6 @@ class About extends Component{
         return (
             <Section>
                 <div className="info">
-                    {
-                        this.props.userInfo ? (
-                            <div className="user">
-                                <h1>当前账号：{this.props.userInfo.name}</h1>
-                                <img className='avatar' src={`${SERVER_URL}${this.props.userInfo.avatar}`} alt='avatar' />
-                            </div>
-                        ) : null
-                    } 
                     <div className="intro">
                         <p>前端页面使用React+Antd的组合，<a href="https://github.com/tobeapro/react-blog" target="__blank">项目地址及说明</a></p>
                         <p>不忘初心  <span role="img" aria-label="emoji">🤩🤩🤩</span></p>
@@ -101,7 +93,7 @@ class About extends Component{
                         </div>
                     </div>
                 </div>
-                <PieCount groups={this.props.classifyCount} total={this.props.total} />          
+                {/* <PieCount groups={this.props.classifyCount} total={this.props.total} />           */}
             </Section>
         )
     }

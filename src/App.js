@@ -5,6 +5,7 @@ import store from './store';
 import { Provider } from 'react-redux';
 import './assets/global.css';
 import MainWrap from './views/MainWrap';
+import './assets/theme.css';
 class App extends Component {
   render() {
     return (

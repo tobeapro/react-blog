@@ -1,5 +1,23 @@
-/* @import '~antd/dist/antd.css'; */
+:root{
+    --main-normal-bg:#fff;
+    --main-dark-bg:#001529;
+    --main-bg:var(--main-normal-bg);
+    --second-normal-bg:#282c34;
+    --second-dark-bg:#2f4f4f;
+    --second-bg:var(--second-normal-bg);
+    --main-normal-text:rgba(0, 0, 0, 0.85);
+    --main-dark-text: #fff;
+    --main-text:var(--main-normal-text);
+    --second-normal-text:#666;
+    --second-dark-text: #eee;
+    --second-text:var(--second-normal-text);
+    --item-noral-bg:#bae7ff6b;
+    --item-dark-bg:repeating-linear-gradient(45deg, black, transparent 100px);
+    --item-bg:var(--item-noral-bg);
+}
+
 @import '~highlight.js/styles/atom-one-dark.css';
+
 /** reset css **/
 html,body,div,h1,h2,h3,h4,h5,h6,p,span,a,i,em,strong,ul,li,input,textarea,section,header,main,footer,aside,table,th,tr,td{
     margin:0;
@@ -73,6 +91,7 @@ a{
     color:#666;
     text-align: center;
 }
+
 /** markdown css **/
 .markdown-article{
 	padding:10px;
@@ -237,7 +256,7 @@ a{
     overflow: auto;
     padding: 1em;
     color: #abb2bf;
-    background: #282c34;
+    background: var(--second-bg);
 }
 .markdown-article>pre>code{
     font-size:14px;
