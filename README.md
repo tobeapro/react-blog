@@ -1,4 +1,4 @@
-## 前端React+Antd ，后端Koa的博客平台
+## 前端React+Antd ，后端Koa+MongoDB的博客平台
 
 #### 启动
 ```js
@@ -28,7 +28,7 @@ yarn build //生产打包
 - 用户管理
 - 文章分类标签管理
 
-后台管理打开很慢就不贴出来了，这是[项目地址](https://github.com/tobeapro/vue_back_manage)；
+[后台管理](http://amz715.com/backManage.html)可以注册账号试用，这是[项目地址](https://github.com/tobeapro/vue_back_manage)；
 
 #### 服务端
 

@@ -77,6 +77,7 @@ class About extends Component{
                 <div className="info">
                     <div className="intro">
                         <p>前端页面使用React+Antd的组合，<a href="https://github.com/tobeapro/react-blog" target="__blank">项目地址及说明</a></p>
+                        <p>前端默认请求admin账号的数据，这是<a href="http://amz715.com/backManage.html" target="__blank">后台管理预览</a>，可以注册账号试用</p>
                         <p>不忘初心  <span role="img" aria-label="emoji">🤩🤩🤩</span></p>
                         <p>坚持奋斗  <span role="img" aria-label="emoji">✨✨✨</span></p>
                         <div className="link">
