@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState,useEffect,Fragment } from 'react';
 import { Icon, Tag, Spin, Button  } from 'antd';
 import styled from 'styled-components';
 import $http from '../../assets/utils/http';
@@ -64,99 +64,85 @@ const colorList = [
     'geekblue',
     'purple'
 ]
-class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  
-            loading: true,
-            isAll:false,
-            listLoading:false,
-            list: [],
-            pageOpt:{
-                pageSize:10,
-                pageNo:0,
-                total:0
-            }
-        }
-    }
-    viewClassify = (e,name) => {
+function Home(props){
+    const [loading,setLoading] = useState(true)
+    const [listLoading,setListLoading] = useState(false)
+    const [isAll,setIsAll] = useState(false)
+    const [pageOpt,setPageOpt] = useState({
+        pageSize:10,
+        pageNo:0,
+        total:0
+    })
+    const [list,setList] = useState([])
+    const viewClassify =  (e,name) => {
         e.stopPropagation();
-        this.props.history.push(`/classify/${name}`)
+        props.history.push(`/classify/${name}`)
     }
-    componentDidMount() {
-        this.getList()
-    }
-    getList = () => {
-        this.setState({
-            listLoading:true
-        })
+    const getList = () => {
+        pageOpt.pageNo++
+        setPageOpt(pageOpt)
+        setListLoading(true)
         $http.postJSON('/front_manage/api/getArticles',{
             name: '',
             noteqClassify: '生活',
             pageOpt:{
-                ...this.state.pageOpt,
-                pageNo:this.state.pageOpt.pageNo+1
+                ...pageOpt,
+                pageNo:pageOpt.pageNo
             }
         }).then(res=>{
             if(res&&res.result===1){
-                this.setState({
-                    list:this.state.list.concat(res.data.list||[]),
-                    pageOpt:Object.assign({},res.data.pageOpt)
-                },()=>{
-                    if(this.state.list.length>=this.state.pageOpt.total){
-                        this.setState({
-                            isAll: true
-                        })
-                    }
-                })
+                const newList = list.concat(res.data.list||[])
+                Object.assign(pageOpt,res.data.pageOpt)
+                setList(newList)
+                if(newList.length>=pageOpt.total){
+                    setIsAll(true)
+                }
             }
         }).finally(()=>{
-            this.setState({
-                loading:false,
-                listLoading: false
-            })
+            setLoading(false)
+            setListLoading(false)
         })
     }
-    render() { 
-        if(this.state.loading){
-            return <Spin tip='Loading...' />
-         }
-        return ( 
-            <Fragment>
-                <ul>
-                    {
-                        this.state.list.map(item=>(
-                            <Item key={item._id} onClick={()=>{this.props.history.push(`/detail/${item._id}`)}}>
-                                <h1 className='title'>{item.title}</h1>
-                                {/* <div className='time'>
-                                    <Icon type="reload" />{formatDate(item.update_time)}
-                                    <Icon type="clock-circle" />{formatDate(item.create_time)}
-                                </div> */}
-                                {
-                                    item.classify?(
-                                        <div className='classify'>
-                                            <Icon type="tag" />
-                                            {
-                                                item.classify.split(',').map((name,i)=>(
-                                                    <Tag key={i} color={colorList[i]||'geekblue'} onClick={(e)=>{this.viewClassify(e,name)}}>{name}</Tag>
-                                                ))
-                                            }
-                                        </div>
-                                    ):null
-                                }
-                                
-                            </Item>
-                        ))
-                    }
-                </ul>
-                <div style={{padding:'10px', textAlign: 'center'}}>
-                    {
-                        this.state.isAll ? <Tag color="#f50">到底了...</Tag> : <Button type="primary" size="small" loading={this.state.listLoading} onClick={()=>{this.getList()}} icon="plus">加载更多</Button>
-                    }       
-                </div>
-            </Fragment>
-        );
-    }
+    useEffect(()=>{
+        getList()
+    },[])
+    return ( 
+        loading?
+        <Spin tip='Loading...' />
+        :
+        <Fragment>
+            <ul>
+                {
+                    list.map(item=>(
+                        <Item key={item._id} onClick={()=>{props.history.push(`/detail/${item._id}`)}}>
+                            <h1 className='title'>{item.title}</h1>
+                            {/* <div className='time'>
+                                <Icon type="reload" />{formatDate(item.update_time)}
+                                <Icon type="clock-circle" />{formatDate(item.create_time)}
+                            </div> */}
+                            {
+                                item.classify?(
+                                    <div className='classify'>
+                                        <Icon type="tag" />
+                                        {
+                                            item.classify.split(',').map((name,i)=>(
+                                                <Tag key={i} color={colorList[i]||'geekblue'} onClick={(e)=>{viewClassify(e,name)}}>{name}</Tag>
+                                            ))
+                                        }
+                                    </div>
+                                ):null
+                            }
+                            
+                        </Item>
+                    ))
+                }
+            </ul>
+            <div style={{padding:'10px', textAlign: 'center'}}>
+                {
+                    isAll ? <Tag color="#f50">到底了...</Tag> : <Button type="primary" size="small" loading={listLoading} onClick={getList} icon="plus">加载更多</Button>
+                }       
+            </div>
+        </Fragment>
+    );
 }
- 
 export default Home;
